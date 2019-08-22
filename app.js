@@ -12,19 +12,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Importing the Routes
-const tasksRoute = require('./routes/tasks');
-const userRoute = require('./routes/user');
 const requestRoute = require('./routes/request');
-app.use('/tasks', tasksRoute);
-app.use('/user', userRoute);
-app.use('/request', requestRoute);
 const loginRoute = require('./routes/login');
 const signupRoute = require('./routes/signup');
 const authRoute = require('./routes/auth');
-app.use('/tasks', tasksRoute);
+app.use('/request', requestRoute);
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
-app.use('/api/signup', authRoute);
+app.use('/', authRoute);
 
 //Routes
 app.get('/', (req, res) => {
