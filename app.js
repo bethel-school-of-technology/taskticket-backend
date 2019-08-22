@@ -18,6 +18,13 @@ const requestRoute = require('./routes/request');
 app.use('/tasks', tasksRoute);
 app.use('/user', userRoute);
 app.use('/request', requestRoute);
+const loginRoute = require('./routes/login');
+const signupRoute = require('./routes/signup');
+const authRoute = require('./routes/auth');
+app.use('/tasks', tasksRoute);
+app.use('/login', loginRoute);
+app.use('/signup', signupRoute);
+app.use('/api/signup', authRoute);
 
 //Routes
 app.get('/', (req, res) => {
