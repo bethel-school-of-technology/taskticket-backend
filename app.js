@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-dotenv.config();
+
 
 //Middleware
 app.use(cors());
@@ -14,14 +14,16 @@ app.use(bodyParser.json());
 //Importing the Routes
 const tasksRoute = require('./routes/tasks');
 const userRoute = require('./routes/user');
+const requestRoute = require('./routes/request');
 app.use('/tasks', tasksRoute);
 app.use('/user', userRoute);
+app.use('/request', requestRoute);
 
 //Routes
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-
+dotenv.config();
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECT, {
   promiseLibrary: require('bluebird'),
