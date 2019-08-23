@@ -1,18 +1,56 @@
 const router = require('express').Router();
-const Signup = require('../models/Signup');
+//const Signup = require('../models/Signup');
+const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { signupValidation } = require('../validation');
+const { userValidation } = require('../validation');
 const { loginValidation } = require('../validation');
 
-// Sign up route
-router.post('/signup', async (req, res) => {
+// // Sign up route
+// router.post('/signup', async (req, res) => {
+//     //Validating the data before we create a user
+//     const { error } = signupValidation(req.body);
+//     if (error) return res.status(400).send(error.details[0].message);
+
+//     //Check if a user is already in the database
+//     const emailExist = await Signup.findOne({ email: req.body.email });
+//     if (emailExist) return res.status(400).send('Email already exists');
+
+//     //Hash the password
+//     const salt = await bcrypt.genSalt(10);
+//     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+//     //Create a new User
+//     const signup = new Signup({
+//         business: req.body.business,
+//         firstName: req.body.firstName,
+//         lastName: req.body.lastName,
+//         streetAddress: req.body.streetAddress,
+//         city: req.body.city,
+//         state: req.body.state,
+//         zipcode: req.body.zipcode,
+//         phoneNumber: req.body.phoneNumber,
+//         email: req.body.email,
+//         password: hashedPassword
+//     });
+//     try {
+//         const savedSignup = await signup.save();
+//         res.send(savedSignup);
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// });
+
+
+
+//Create a new User
+router.post('/user', async (req, res) => {
     //Validating the data before we create a user
-    const { error } = signupValidation(req.body);
+    const { error } = userValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     //Check if a user is already in the database
-    const emailExist = await Signup.findOne({ email: req.body.email });
+    const emailExist = await User.findOne({ email: req.body.email });
     if (emailExist) return res.status(400).send('Email already exists');
 
     //Hash the password
@@ -20,7 +58,7 @@ router.post('/signup', async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     //Create a new User
-    const signup = new Signup({
+    const user = new User({
         business: req.body.business,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -33,8 +71,8 @@ router.post('/signup', async (req, res) => {
         password: hashedPassword
     });
     try {
-        const savedSignup = await signup.save();
-        res.send(savedSignup);
+        const savedUser = await user.save();
+        res.send(savedUser);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -48,7 +86,7 @@ router.post('/login', async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     //Checking if the email exists
-    const login = await Signup.findOne({ email: req.body.email });
+    const login = await User.findOne({ email: req.body.email });
     if (!login) return res.status(400).send('Email or password is wrong!');
 
     //Check if password is correct

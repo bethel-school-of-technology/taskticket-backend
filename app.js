@@ -13,13 +13,15 @@ app.use(bodyParser.json());
 
 //Importing the Routes
 const requestRoute = require('./routes/request');
-const loginRoute = require('./routes/login');
-const signupRoute = require('./routes/signup');
+//const loginRoute = require('./routes/login');
+//const signupRoute = require('./routes/signup');
 const authRoute = require('./routes/auth');
+const userRoute = require('./routes/users');
 app.use('/request', requestRoute);
-app.use('/login', loginRoute);
-app.use('/signup', signupRoute);
+//app.use('/login', loginRoute);
+//app.use('/signup', signupRoute);
 app.use('/', authRoute);
+app.use('/', userRoute);
 
 //Routes
 app.get('/', (req, res) => {

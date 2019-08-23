@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const SignUp = require('../models/Signup');
+const User = require('../models/User');
 
 
 //Signup route get
 router.get('/', (req, res) => {
-    res.send('We are on signup');
+    res.send('We are on users');
 });
 
 //Submits all the signups
