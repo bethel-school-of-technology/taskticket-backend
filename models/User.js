@@ -48,6 +48,10 @@ const UserSchema = mongoose.Schema({
         required: true,
         max: 1075,
         min: 7
+    },
+    isAdmin: {
+        type: Boolean,
+        required: false
     }
 });
 

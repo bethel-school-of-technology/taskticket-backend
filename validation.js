@@ -30,7 +30,8 @@ const userValidation = (data) => {
         zipcode: Joi.number().min(5).required(),
         phoneNumber: Joi.number().min(11).required(),
         email: Joi.string().min(6).required().email(),
-        password: Joi.string().min(6).required()
+        password: Joi.string().min(6).required(),
+        isAdmin: Joi.boolean()
     };
     return Joi.validate(data, schema);
 };
@@ -43,7 +44,17 @@ const loginValidation = (data) => {
     return Joi.validate(data, schema)
 };
 
+const adminValidation = (data) => {
+    const schema = {
+        email: Joi.string().min(6).required().email(),
+        password: Joi.string().min(6).required(),
+        isAdmin: Joi.boolean()
+    };
+    return Joi.validate(data, schema)
+}
+
 
 //module.exports.signupValidation = signupValidation;
 module.exports.loginValidation = loginValidation;
-module.exports.userValidation = userValidation; 
+module.exports.userValidation = userValidation;
+module.exports.adminValidation = adminValidation;
