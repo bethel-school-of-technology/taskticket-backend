@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { userValidation } = require('../validation');
 const { loginValidation } = require('../validation');
+//const { adminValidation} = require('../validation');
 
 // // Sign up route
 // router.post('/signup', async (req, res) => {
@@ -68,8 +69,12 @@ router.post('/user', async (req, res) => {
         zipcode: req.body.zipcode,
         phoneNumber: req.body.phoneNumber,
         email: req.body.email,
-        password: hashedPassword
+        password: hashedPassword,
+        isAdmin: req.body.isAdmin
     });
+    if (req.body.isAdmin === true) {
+        User.isAdmin = true;
+    }
     try {
         const savedUser = await user.save();
         res.send(savedUser);
@@ -98,6 +103,13 @@ router.post('/login', async (req, res) => {
     res.header('auth-token', token).send(token);
 
     res.send('Logged in');
+});
+
+// logout route
+
+router.get('/logout', function (req, res) {
+    res.status(401).send('Logged out')
+    //or res.status(401).end() to force the user to log in on next visit
 });
 
 
