@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const Request = require('../models/Request');
-const Response = require('../models/Response')
+const Response = require('../models/Response');
+
 
 //This get's back all the tasks
 router.get('/', async (req, res) => {
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
     const response = await new Response({
         title: req.body.title,
         description: req.body.description,
-        
+        requestNumber: req.body.requestNumber
     });
     try {
         const savedResponse = response.save();
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:responseId', async (req, res) => {
     try {
-        const response = await Response.findById(req.params.responseId);
+        const response = await Response.findById(req.params.responseId || req.user.isAdmin);
         res.json(response);
     } catch (err) {
         res.json({ message: err });
@@ -47,7 +47,7 @@ router.get('/:responseId', async (req, res) => {
 
 router.delete('/:responseId', async (req, res) => {
     try {
-        const removedResponse = await Response.remove({ _id: req.params.responseId });
+        const removedResponse = await Response.remove({ _id: req.params.responseId || req.user.isAdmin });
         res.json(removedResponse);
     } catch (err) {
         res.json({ message: err });
@@ -58,8 +58,8 @@ router.delete('/:responseId', async (req, res) => {
 //Update a task
 router.patch('/:responseId', async (req, res) => {
     try {
-        const updatedResponse = await Response.updateOne({ _id: req.params.responseId},
-            { $set: { title: req.body.title, description: req.body.description,} });
+        const updatedResponse = await Response.updateOne({ _id: req.params.responseId || req.user.isAdmin },
+            { $set: { title: req.body.title, description: req.body.description, } });
         res.json(updatedResponse);
     } catch (err) {
         res.json({ message: err });

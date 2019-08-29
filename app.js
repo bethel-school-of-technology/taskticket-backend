@@ -14,14 +14,11 @@ app.use(bodyParser.json());
 //Importing the Routes
 const requestRoute = require('./routes/request');
 const responseRoute = require('./routes/response');
-//const loginRoute = require('./routes/login');
-//const signupRoute = require('./routes/signup');
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/users');
+
 app.use('/request', requestRoute);
 app.use('/response', responseRoute);
-//app.use('/login', loginRoute);
-//app.use('/signup', signupRoute);
 app.use('/', authRoute);
 app.use('/', userRoute);
 
