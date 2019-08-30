@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const response = await new Response({
-        title: req.body.title,
-        description: req.body.description,
-        requestNumber: req.body.requestNumber
+        receivedMessage: req.body.receivedMessage,
+        adminMessage: req.body.adminMessage,
+        composeMessage: req.body.composeMessage
     });
     try {
         const savedResponse = response.save();

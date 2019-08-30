@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const ResponseSchema = mongoose.Schema({
-    title: {
+    receivedMessage: {
         type: String,
         required: true
     },
-    description: {
+    adminMessage: {
         type: String,
         required: true
     },
-    requestNumber: {
+    composeMessage: {
         type: String,
         required: true
     },
