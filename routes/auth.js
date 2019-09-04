@@ -23,14 +23,7 @@ router.post('/user', async (req, res) => {
 
     //Create a new User
     const user = new User({
-        business: req.body.business,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        streetAddress: req.body.streetAddress,
-        city: req.body.city,
-        state: req.body.state,
-        zipcode: req.body.zipcode,
-        phoneNumber: req.body.phoneNumber,
+        fullName: req.body.fullName,
         email: req.body.email,
         password: hashedPassword,
         isAdmin: req.body.isAdmin
@@ -46,6 +39,16 @@ router.post('/user', async (req, res) => {
     }
 });
 
+// Get User Info (one)
+
+router.get('/user/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.json(user);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
 
 //Login route
 
@@ -70,10 +73,21 @@ router.post('/login', async (req, res) => {
 
 // logout route
 
-router.get('/logout', function (req, res) {
+router.post('/logout', function (req, res) {
     res.status(401).send('Logged out')
-    //or res.status(401).end() to force the user to log in on next visit
+
 });
+
+//delete user it's not working yet
+router.delete("/user/:id", async (req, res) => {
+    try {
+        const removedUser = await User.deleteOne({ _id: req.params.userId });
+        res.json(removedUser);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
 
 
 module.exports = router
