@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const ResponseSchema = mongoose.Schema({
-    receivedMessage: {
+const CommentsSchema = mongoose.Schema({
+    commentsId: {
         type: String,
         required: true
     },
-    adminMessage: {
+    requestId: {
         type: String,
         required: true
     },
-    composeMessage: {
+    message: {
         type: String,
         required: true
     },
@@ -21,4 +21,4 @@ const ResponseSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('response', ResponseSchema);
+module.exports = mongoose.model('comments', CommentsSchema);
