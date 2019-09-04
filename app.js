@@ -16,11 +16,13 @@ const requestRoute = require('./routes/request');
 const responseRoute = require('./routes/response');
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/users');
+const userProfileRoute = require('./routes/userProfile');
 
 app.use('/request', requestRoute);
 app.use('/response', responseRoute);
 app.use('/', authRoute);
 app.use('/', userRoute);
+app.use('/', userProfileRoute);
 
 //Routes
 app.get('/', (req, res) => {
