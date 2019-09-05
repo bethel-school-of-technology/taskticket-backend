@@ -80,16 +80,25 @@ router.delete('/userProfile/:id', (req, res, next) => {
         .catch(next);
 });
 
-// //Update a comment
-// router.patch('/:commentsId', async (req, res) => {
-//     try {
-//         const updatedComments = await Comments.updateOne({ _id: req.params.commentsId },
-//             { $set: { commentsId: req.body.commentsId, requestId: req.body.requestId, message: req.body.message } });
-//         res.json(updatedComments);
-//     } catch (err) {
-//         res.json({ message: err });
-//     }
-// })
+//Update a comment
+router.patch('/userProfile/:id', async (req, res) => {
+    try {
+        const updatedUserProfile = await UserProfile.updateOne({ _id: req.params.id },
+            {
+                $set: {
+                    business: req.body.business,
+                    streetAddress: req.body.streetAddress,
+                    city: req.body.city,
+                    state: req.body.state,
+                    zipcode: req.body.zipcode,
+                    phoneNumber: req.body.phoneNumber
+                }
+            });
+        res.json(updatedUserProfile);
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
 
 
 module.exports = router;

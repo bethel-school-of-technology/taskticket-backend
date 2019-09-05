@@ -74,15 +74,15 @@ router.delete('/:id', (req, res, next) => {
 
 
 
-// //Update a comment
-// router.patch('/:commentsId', async (req, res) => {
-//     try {
-//         const updatedComments = await Comments.updateOne({ _id: req.params.commentsId },
-//             { $set: { commentsId: req.body.commentsId, requestId: req.body.requestId, message: req.body.message } });
-//         res.json(updatedComments);
-//     } catch (err) {
-//         res.json({ message: err });
-//     }
-// })
+//Update a comment
+router.patch('/:id', async (req, res) => {
+    try {
+        const updatedComments = await Comments.updateOne({ _id: req.params.id },
+            { $set: { response: req.body.response } });
+        res.json(updatedComments);
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
 
 module.exports = router;
