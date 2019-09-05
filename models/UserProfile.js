@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const UserProfileSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
+        ref: 'User',
         required: true
     },
     business: {

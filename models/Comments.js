@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
 
 const CommentsSchema = mongoose.Schema({
-    commentsId: {
-        type: String,
+    request: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Request',
         required: true
     },
-    requestId: {
-        type: String,
-        required: true
-    },
-    message: {
+    response: {
         type: String,
         required: true
     },
@@ -21,4 +18,4 @@ const CommentsSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('comments', CommentsSchema);
+module.exports = mongoose.model('Comments', CommentsSchema);

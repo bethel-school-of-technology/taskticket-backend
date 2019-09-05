@@ -13,19 +13,19 @@ app.use(bodyParser.json());
 
 //Importing the Routes
 const requestRoute = require('./routes/request');
-const responseRoute = require('./routes/comments');
+const commentsRoute = require('./routes/comments');
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/users');
 const userProfileRoute = require('./routes/userProfile');
 
 app.use('/request', requestRoute);
-app.use('/response', responseRoute);
+app.use('/comments', commentsRoute);
 app.use('/', authRoute);
 app.use('/', userRoute);
 app.use('/', userProfileRoute);
 
 //Routes
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('Hello World!');
 });
 dotenv.config();
