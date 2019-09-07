@@ -80,7 +80,7 @@ router.delete('/userProfile/:id', (req, res, next) => {
         .catch(next);
 });
 
-//Update a comment
+//Update a userProfile
 router.patch('/userProfile/:id', async (req, res) => {
     try {
         const updatedUserProfile = await UserProfile.updateOne({ _id: req.params.id },
