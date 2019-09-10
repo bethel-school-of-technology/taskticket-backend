@@ -8,7 +8,7 @@ const { loginValidation } = require('../validation');
 
 
 //Create a new User
-router.post('/user', async (req, res) => {
+router.post('/signup', async (req, res) => {
     //Validating the data before we create a user
     const { error } = userValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -41,7 +41,7 @@ router.post('/user', async (req, res) => {
 
 // Get User Info (one)
 
-router.get('/user/:id', async (req, res) => {
+router.get('/signup/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         res.json(user);
@@ -79,9 +79,9 @@ router.post('/logout', function (req, res) {
 });
 
 //delete user it's not working yet
-router.delete("/user/:id", async (req, res) => {
+router.delete("/signup/:id", async (req, res) => {
     try {
-        const removedUser = await User.deleteOne({ _id: req.params.userId });
+        const removedUser = await User.deleteOne({ _id: req.params.id });
         res.json(removedUser);
     } catch (err) {
         res.json({ message: err });
