@@ -22,12 +22,18 @@ router.post('/', async (req, res) => {
     description: req.body.description,
     urgency: req.body.urgency
   });
-  try {
-    const savedRequest = request.save();
-    res.json(savedRequest);
-  } catch (err) {
-    res.json({ message: err })
-  }
+  return request
+    .save()
+    .then(result => {
+      console.log(result);
+      res.status(201).json(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json({
+        error: err
+      });
+    });
 });
 
 
